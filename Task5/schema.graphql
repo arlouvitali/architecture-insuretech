@@ -1,0 +1,41 @@
+"""Client information domain."""
+type Client {
+  id: ID!
+  name: String
+  age: Int
+  documents: [Document!]!
+  relatives: [Relative!]!
+}
+
+"""Client document."""
+type Document {
+  id: ID!
+  type: String
+  number: String
+  issueDate: String
+  expiryDate: String
+}
+
+"""Client relative."""
+type Relative {
+  id: ID!
+  relationType: String
+  name: String
+  age: Int
+}
+
+"""Root query for client-info service."""
+type Query {
+  """Get client by ID (equivalent to GET /clients/{id})."""
+  client(id: ID!): Client
+
+  """Get client documents by ID (equivalent to GET /clients/{id}/documents)."""
+  clientDocuments(clientId: ID!): [Document!]!
+
+  """Get client relatives by ID (equivalent to GET /clients/{id}/relatives)."""
+  clientRelatives(clientId: ID!): [Relative!]!
+}
+
+schema {
+  query: Query
+}
